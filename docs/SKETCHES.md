@@ -6,9 +6,10 @@ For the native editor and simulator controls, run:
 python tools/sketch_studio.py
 ```
 
-Change the sketch directly in UGOT Sketch Studio, then choose **Save & Run**.
-Syntax is checked before the file is saved. **Stop** closes the simulation;
-**Reload** restores the last saved version.
+Change the sketch in the **Sketch** tab, then choose **Save & Run**. The embedded
+render switches on in the **Simulator** tab of that same window. Syntax is
+checked before saving. **Stop** stops the embedded physics loop, **Reset Robot**
+returns it to the home pose, and **Reload** restores the last saved sketch.
 
 Edit `sketches/user_sketch.py`, then run:
 

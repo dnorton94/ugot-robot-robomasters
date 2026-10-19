@@ -52,9 +52,11 @@ Launch the native sketch editor:
 python tools/sketch_studio.py
 ```
 
-Edit `setup(robot)` and `loop(robot)` inside the program, then select **Save &
-Run**. The editor validates Python syntax before saving and provides Stop, Reload,
-and a ready-made circle example. The equivalent command-line workflow is:
+Edit `setup(robot)` and `loop(robot)` inside the **Sketch** tab, then select
+**Save & Run**. The live model appears in the **Simulator** tab in the same
+window—no separate MuJoCo viewer is opened. The editor validates Python syntax
+before saving and provides Stop, Reset Robot, Reload, and a circle example. The
+equivalent command-line workflow is:
 
 ```powershell
 python tools/run_sketch.py
