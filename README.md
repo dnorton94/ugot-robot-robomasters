@@ -20,6 +20,8 @@ dimensions and inertial values that still need physical measurement.
 - `tests/test_structure.py` — dependency-free structural checks.
 - `docs/PROVENANCE.md` — measured/published/estimated value ledger.
 - `docs/CONTROL.md` — wheel ordering and mecanum inverse kinematics.
+- `sketches/user_sketch.py` — editable user program for the car.
+- `tools/sketch_studio.py` — graphical sketch editor and embedded simulator.
 
 ## Quick start
 
@@ -46,17 +48,13 @@ radians, and newtons.
 
 ## Program it like an Arduino sketch
 
-Launch the native sketch editor:
+On Windows, double-click `launch_sketch_editor.bat`. It opens UGOT Sketch
+Studio without requiring a terminal. On any supported platform, install the
+dependencies and launch it with Python:
 
 ```powershell
+python -m pip install -r requirements.txt
 python tools/sketch_studio.py
-```
-
-For the MuJoCo-style layout with an expandable **Sketch** section directly
-below **Logging**, run:
-
-```powershell
-python tools/sidebar_studio.py
 ```
 
 Edit `setup(robot)` and `loop(robot)` inside the **Sketch** tab, then select
@@ -73,6 +71,10 @@ The arena is a finite raised platform. If the robot drives over an edge and its
 chassis falls below the configured reset height, the runtime restores the home
 pose, clears the wheel controller, and calls `setup()` again. See
 `docs/SKETCHES.md` for the complete user API.
+
+The stock MuJoCo viewer remains available through `tools/run_sketch.py`. Its
+left and right control panels are compiled into MuJoCo and cannot accept a
+Python editor extension, so code editing is provided by UGOT Sketch Studio.
 
 ## Model status
 

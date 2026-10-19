@@ -1,8 +1,9 @@
 # Arduino-style sketches
 
-For the native editor and simulator controls, run:
+On Windows, double-click `launch_sketch_editor.bat`. Alternatively, run:
 
 ```powershell
+python -m pip install -r requirements.txt
 python tools/sketch_studio.py
 ```
 
@@ -39,6 +40,7 @@ def loop(robot):
 - `robot.reset_count` — number of automatic fall resets.
 
 This resembles the Arduino `setup()`/`loop()` workflow while remaining ordinary
-Python. Saving does not hot-reload a running model; close and rerun it after an
-edit. This API controls the simulation only and must not be connected directly
+Python. **Save & Run** reloads the saved code and starts a fresh simulation, so
+the application does not need to be closed after an edit. This API controls the
+simulation only and must not be connected directly
 to hardware without a separate, safety-reviewed transport and motor layer.
