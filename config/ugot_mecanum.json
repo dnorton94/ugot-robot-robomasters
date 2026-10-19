@@ -39,5 +39,10 @@
     "joint_damping_nms_per_rad": {"value": 0.002, "status": "estimated"},
     "rolling_friction": {"value": 0.003, "status": "estimated"},
     "sliding_friction": {"value": 0.9, "status": "estimated"}
+  },
+  "environment": {
+    "platform_half_extent_m": {"value": 1.25, "status": "design-assumption"},
+    "platform_thickness_m": {"value": 0.10, "status": "design-assumption"},
+    "fall_reset_height_m": {"value": -0.30, "status": "design-assumption"}
   }
 }

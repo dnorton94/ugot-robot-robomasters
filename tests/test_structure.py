@@ -35,6 +35,12 @@ class ModelStructureTests(unittest.TestCase):
         self.assertIn("PhysicsArticulationRootAPI", text)
         self.assertEqual(text.count("def PhysicsRevoluteJoint"), 4)
 
+    def test_finite_platform_replaces_infinite_plane(self):
+        platform = self.root.find("./worldbody/geom[@name='platform']")
+        self.assertIsNotNone(platform)
+        self.assertEqual(platform.get("type"), "box")
+        self.assertIsNone(self.root.find("./worldbody/geom[@type='plane']"))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -44,6 +44,20 @@ around the MJCF's normalized torque actuators.
 Run commands from this directory. The model uses metres, kilograms, seconds,
 radians, and newtons.
 
+## Program it like an Arduino sketch
+
+Edit `sketches/user_sketch.py`, which provides `setup(robot)` and `loop(robot)`,
+then launch it:
+
+```powershell
+python tools/run_sketch.py
+```
+
+The arena is a finite raised platform. If the robot drives over an edge and its
+chassis falls below the configured reset height, the runtime restores the home
+pose, clears the wheel controller, and calls `setup()` again. See
+`docs/SKETCHES.md` for the complete user API.
+
 ## Model status
 
 This is a functional simulation baseline, not yet a dimensional scan. UBTECH

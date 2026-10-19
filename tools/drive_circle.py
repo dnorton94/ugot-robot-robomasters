@@ -49,6 +49,9 @@ class WheelSpeedPI:
         self.integral_limit = integral_limit
         self.integral = [0.0] * 4
 
+    def reset(self):
+        self.integral[:] = [0.0] * 4
+
     def update(self, targets, measured, dt):
         controls = []
         for i, (target, actual) in enumerate(zip(targets, measured)):
@@ -77,6 +80,8 @@ def run(args):
     dof_addresses = [model.jnt_dofadr[mujoco.mj_name2id(
         model, mujoco.mjtObj.mjOBJ_JOINT, f"{name}_joint")] for name in WHEELS]
     controller = WheelSpeedPI(args.kp, args.ki)
+    reset_height = config["environment"]["fall_reset_height_m"]["value"]
+    reset_count = 0
 
     viewer = None
     if not args.headless:
@@ -89,12 +94,18 @@ def run(args):
         viewer.cam.elevation = -38.0
 
     start_wall = time.perf_counter()
+    elapsed_sim = 0.0
     try:
-        while data.time < args.duration and (viewer is None or viewer.is_running()):
+        while elapsed_sim < args.duration and (viewer is None or viewer.is_running()):
             step_wall = time.perf_counter()
             measured = [data.qvel[address] for address in dof_addresses]
             data.ctrl[:] = controller.update(targets, measured, model.opt.timestep)
             mujoco.mj_step(model, data)
+            elapsed_sim += model.opt.timestep
+            if data.qpos[2] < reset_height:
+                mujoco.mj_resetDataKeyframe(model, data, 0)
+                controller.reset()
+                reset_count += 1
             if viewer is not None:
                 viewer.sync()
                 remaining = model.opt.timestep - (time.perf_counter() - step_wall)
@@ -109,7 +120,8 @@ def run(args):
         "target_wheel_rad_s": dict(zip(WHEELS, targets)),
         "final_position_m": {"x": float(data.qpos[0]), "y": float(data.qpos[1]), "z": float(data.qpos[2])},
         "final_yaw_rad": yaw,
-        "simulated_seconds": float(data.time),
+        "simulated_seconds": elapsed_sim,
+        "fall_resets": reset_count,
         "wall_seconds": time.perf_counter() - start_wall,
     }
     print(json.dumps(result, indent=2))

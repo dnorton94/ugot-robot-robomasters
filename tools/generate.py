@@ -16,7 +16,7 @@ def load_values():
     raw = json.loads(CONFIG.read_text(encoding="utf-8"))
     def unpack(section):
         return {key: item["value"] for key, item in raw[section].items()}
-    return raw, unpack("dimensions"), unpack("mass"), unpack("drive")
+    return raw, unpack("dimensions"), unpack("mass"), unpack("drive"), unpack("environment")
 
 
 def fmt(values):
@@ -39,7 +39,7 @@ def indent(node, level=0):
     if level and (not node.tail or not node.tail.strip()): node.tail = pad
 
 
-def build_mjcf(dim, mass, drive):
+def build_mjcf(dim, mass, drive, environment):
     root = ET.Element("mujoco", model="UGOT mecanum car")
     add(root, "compiler", angle="radian", coordinate="local", inertiafromgeom="true", balanceinertia="true")
     add(root, "option", timestep="0.002", integrator="implicitfast", solver="Newton", iterations="80", gravity="0 0 -9.81")
@@ -59,7 +59,12 @@ def build_mjcf(dim, mass, drive):
     add(asset, "material", name="screen", rgba="0.03 0.13 0.20 1", emission="0.15")
     world = add(root, "worldbody")
     add(world, "light", pos="0 0 2", dir="0 0 -1", directional="true")
-    add(world, "geom", name="floor", type="plane", size="4 4 0.1", material="ground", contype="1", conaffinity="1")
+    platform_half = environment["platform_half_extent_m"]
+    platform_thickness = environment["platform_thickness_m"]
+    add(world, "geom", name="platform", type="box",
+        pos=fmt((0, 0, -platform_thickness / 2)),
+        size=fmt((platform_half, platform_half, platform_thickness / 2)),
+        material="ground", contype="1", conaffinity="1")
     z0 = dim["wheel_radius_m"] + 0.006
     car = add(world, "body", name="base_link", pos=fmt((0, 0, z0)))
     add(car, "freejoint", name="base_free")
@@ -121,9 +126,9 @@ def build_usda(dim, mass, drive):
 
 
 def main():
-    _, dim, mass, drive = load_values()
+    _, dim, mass, drive, environment = load_values()
     MODEL.mkdir(parents=True, exist_ok=True)
-    (MODEL / "ugot_mecanum.xml").write_text(build_mjcf(dim, mass, drive), encoding="utf-8")
+    (MODEL / "ugot_mecanum.xml").write_text(build_mjcf(dim, mass, drive, environment), encoding="utf-8")
     (MODEL / "ugot_mecanum.usda").write_text(build_usda(dim, mass, drive), encoding="utf-8")
     print("Generated model/ugot_mecanum.xml and model/ugot_mecanum.usda")
 
