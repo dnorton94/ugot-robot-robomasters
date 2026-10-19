@@ -48,28 +48,28 @@ radians, and newtons.
 
 ## Program it like an Arduino sketch
 
-### Where the user edits the robot code
+### Where do I program the robot?
 
 The window with **File**, **Option**, **Simulation**, **Physics**, and **Logging**
-is the official MuJoCo viewer. It displays and simulates the robot, but it does
-not contain a code editor.
+is where you watch and test the virtual robot. This window is called MuJoCo. You
+do not write the robot's instructions in that window.
 
-The robot's program is:
+You write the robot's instructions in this file:
 
 ```text
 sketches/user_sketch.py
 ```
 
-Open that file in VS Code, Notepad, or another text editor. Change `setup()` and
-`loop()`, save the file, close the currently running MuJoCo window, then run:
+Open the file in VS Code, Notepad, or another text editor. Change `setup()` and
+`loop()`, then save it. Close the MuJoCo window if it is already open and run:
 
 ```powershell
 python tools/run_sketch.py
 ```
 
-MuJoCo will reopen and execute the updated sketch. See
+The virtual robot will reopen and follow your new instructions. See
 [`docs/MUJOCO_VIEWER.md`](docs/MUJOCO_VIEWER.md) for an explanation of the
-official viewer's panels and buttons.
+buttons in the MuJoCo window.
 
 ### Optional graphical sketch editor
 
