@@ -1,3 +1,7 @@
+---
+gist: https://gist.github.com/inspiredlabs/00e7a1054ba9d0b8c8e8338d042ffdb7
+---
+
 # UGOT mecanum car digital twin
 
 An engineering-grade **first-pass** model of the UBTECH UGOT mecanum-wheel car.
@@ -61,4 +65,3 @@ Isaac Sim version; Isaac Sim is not bundled with this deliverable.
 4. Centre of mass using a two-scale or suspension test.
 5. Wheel free speed and stall/continuous torque.
 6. Roller friction and rolling resistance on the intended floor.
-
