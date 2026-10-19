@@ -24,7 +24,7 @@ python tools/generate.py
 python -m unittest discover -s tests -v
 python -m pip install mujoco
 python tools/smoke_test.py
-python -m mujoco.viewer --mjcf model/ugot_mecanum.xml
+python tools/view_model.py
 ```
 
 Run commands from this directory. The model uses metres, kilograms, seconds,
