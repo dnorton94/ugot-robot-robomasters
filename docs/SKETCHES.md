@@ -1,5 +1,15 @@
 # Arduino-style sketches
 
+For the native editor and simulator controls, run:
+
+```powershell
+python tools/sketch_studio.py
+```
+
+Change the sketch directly in UGOT Sketch Studio, then choose **Save & Run**.
+Syntax is checked before the file is saved. **Stop** closes the simulation;
+**Reload** restores the last saved version.
+
 Edit `sketches/user_sketch.py`, then run:
 
 ```powershell

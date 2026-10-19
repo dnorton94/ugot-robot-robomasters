@@ -46,8 +46,15 @@ radians, and newtons.
 
 ## Program it like an Arduino sketch
 
-Edit `sketches/user_sketch.py`, which provides `setup(robot)` and `loop(robot)`,
-then launch it:
+Launch the native sketch editor:
+
+```powershell
+python tools/sketch_studio.py
+```
+
+Edit `setup(robot)` and `loop(robot)` inside the program, then select **Save &
+Run**. The editor validates Python syntax before saving and provides Stop, Reload,
+and a ready-made circle example. The equivalent command-line workflow is:
 
 ```powershell
 python tools/run_sketch.py
