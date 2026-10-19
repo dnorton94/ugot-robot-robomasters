@@ -118,7 +118,7 @@ class SketchStudio(tk.Tk):
             self.reload_sketch()
 
     def save_sketch(self):
-        source = self.editor.get("1.0", "end-1c") + "\n"
+        source = self.editor.get("1.0", "end-1c").rstrip("\n") + "\n"
         try:
             compile(source, str(SKETCH), "exec")
         except SyntaxError as error:
