@@ -52,6 +52,13 @@ Launch the native sketch editor:
 python tools/sketch_studio.py
 ```
 
+For the MuJoCo-style layout with an expandable **Sketch** section directly
+below **Logging**, run:
+
+```powershell
+python tools/sidebar_studio.py
+```
+
 Edit `setup(robot)` and `loop(robot)` inside the **Sketch** tab, then select
 **Save & Run**. The live model appears in the **Simulator** tab in the same
 window—no separate MuJoCo viewer is opened. The editor validates Python syntax
