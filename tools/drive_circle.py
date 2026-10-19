@@ -82,6 +82,11 @@ def run(args):
     if not args.headless:
         from mujoco import viewer as mj_viewer
         viewer = mj_viewer.launch_passive(model, data)
+        viewer.cam.type = mujoco.mjtCamera.mjCAMERA_TRACKING
+        viewer.cam.trackbodyid = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "base_link")
+        viewer.cam.distance = 0.85
+        viewer.cam.azimuth = 135.0
+        viewer.cam.elevation = -38.0
 
     start_wall = time.perf_counter()
     try:
