@@ -27,6 +27,16 @@ python tools/smoke_test.py
 python tools/view_model.py
 ```
 
+Drive a 0.45 m left-hand circle at 0.20 m/s:
+
+```powershell
+python tools/drive_circle.py --radius 0.45 --speed 0.20 --direction left
+```
+
+Use `--direction right` for the opposite direction. Add `--headless` for an
+automated run without the viewer. The circle driver closes a PI wheel-speed loop
+around the MJCF's normalized torque actuators.
+
 Run commands from this directory. The model uses metres, kilograms, seconds,
 radians, and newtons.
 
