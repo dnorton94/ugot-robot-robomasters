@@ -48,6 +48,31 @@ radians, and newtons.
 
 ## Program it like an Arduino sketch
 
+### Where the user edits the robot code
+
+The window with **File**, **Option**, **Simulation**, **Physics**, and **Logging**
+is the official MuJoCo viewer. It displays and simulates the robot, but it does
+not contain a code editor.
+
+The robot's program is:
+
+```text
+sketches/user_sketch.py
+```
+
+Open that file in VS Code, Notepad, or another text editor. Change `setup()` and
+`loop()`, save the file, close the currently running MuJoCo window, then run:
+
+```powershell
+python tools/run_sketch.py
+```
+
+MuJoCo will reopen and execute the updated sketch. See
+[`docs/MUJOCO_VIEWER.md`](docs/MUJOCO_VIEWER.md) for an explanation of the
+official viewer's panels and buttons.
+
+### Optional graphical sketch editor
+
 On Windows, double-click `launch_sketch_editor.bat`. It opens UGOT Sketch
 Studio without requiring a terminal. On any supported platform, install the
 dependencies and launch it with Python:
